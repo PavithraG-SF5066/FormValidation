@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form validation</title>
+    <style>
+        body
+        {
+            margin: 0;
+            padding: 0;
+        }
+        img
+        {
+            width: 20%;
+            height: 20%;
+        }
+        .main input {
+            /* border: 0.1rem solid rgb(208, 205, 205); */
+            border-radius: 0.3rem;
+            height: 1.5rem;
+        }
+
+        button {
+            padding: 0.7rem;
+            width: 8rem;
+            border-radius: 0.8rem;
+            background-color: rgb(61, 135, 219);
+            color: white;
+            font-weight: bold;
+            border: none;
+            margin-left: 6.5rem;
+        }
+
+        #output,
+        .main {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+        #table-div
+        {
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <form id="myForm">
+            <!-- Input Fields -->
+            <label for="userName">Name:</label>
+            <input type="text" name="userName" id="userName" onblur="validateName()" required ><span id="name-error"
+                class="error"></span>
+            <br><br>
+
+            <label for="fatherName">Father Name:</label>
+            <input type="text" name="fatherName" id="fatherName" onblur="validateFatherName()" required><span
+                id="fatherName-error" class="error"></span>
+            <br><br>
+
+            <label for="gender">Gender :</label>
+            <br>
+            <select id="gender" onblur="validateGender()">
+                <option value="Select">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="others">Others</option>
+            </select>
+            <span id="gender-error" class="error"></span>
+            <br><br>
+
+            <label for="phone">Phone:</label>
+            <input type="text" name="phone" id="phone" onblur="validatePhone()" maxlength="10">
+            <span id="phone-error" class="error"></span>
+            <br><br>
+
+            <label for="languagesId">Languages Known:</label>
+            <br>
+            <select id="languagesId" onblur="validateLanguage()" multiple>
+                <option value="english">English</option>
+                <option value="hindi">Hindi</option>
+                <option value="spanish">Spanish</option>
+                <option value="french">French</option>
+            </select>
+            <span id="languages-error" class="error"></span>
+            <br><br>
+            <!-- Date of birth input -->
+            <label for="dob">DOB:</label>
+            <input type="date" name="dob" id="dob"  required>
+            <span id="dob-error" class="error"></span>
+            <br><br>
+
+
+            <!-- File Upload -->
+            <label for="photo-file">Photo:</label>
+            <input type="file" name="photo-file" id="photo-file" onblur="validatePhoto()" required>
+            <span id="photo-error" class="error"></span>
+            <br><br>
+
+            <label for="balance">Balance:</label>
+            <input type="text" name="balance" id="balance" onblur="validateBalance()" required>
+            <span id="balance-error" class="error"></span>
+            <br><br>
+
+            <input type="submit" id="addBtn" value="Add" onclick="SubmitValidation()">
+
+        </form>
+    </div>
+    <div>
+        <div id="table-div">
+            <table border="3">
+                <tr>
+                    <th style="width: 10%;">Name</th>
+                    <th style="width: 10%;">Father Name</th>
+                    <th style="width: 10%;">Gender</th>
+                    <th style="width: 10%;">Phone</th>
+                    <th style="width: 10%;">Languages</th>
+                    <th style="width: 10%;">DOB</th>
+                    <th style="width: 15%;">Photo</th>
+                    <th style="width: 10%;">Balance</th>
+                    <th style="width: 15%;">Actions</th>
+                </tr>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+
+</body>
+<script src="crudform.js"></script>
+
+</html>
