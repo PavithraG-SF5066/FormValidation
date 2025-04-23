@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation</title>
+    <script src="FormValidation.js" defer></script>
+    <style>
+        .main-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .main input {
+            border: 0.1rem solid rgb(208, 205, 205);
+            border-radius: 0.3rem;
+            height: 1.5rem;
+        }
+
+        button {
+            padding: 0.7rem;
+            width: 8rem;
+            border-radius: 0.8rem;
+            background-color: rgb(61, 135, 219);
+            color: white;
+            font-weight: bold;
+            border: none;
+            margin-left: 6.5rem;
+        }
+
+        #output,
+        .main {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+
+        img {
+            max-width: 300px;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .dob-mobile {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .city-state {
+            display: flex;
+            gap: 1rem;
+        }
+
+        sup {
+            color: red;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+        }
+
+        #submitBtn {
+            margin: 1rem;
+            height: 1.7rem;
+            width: 5rem;
+            /* color: white;
+            background-color: ; */
+        }
+
+        .formclass {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="myForm">
+        <div class="main-container">
+            <div class="form-right">
+                <label for="username">Name as per ID Proof<sup>*</sup></label><span id="usernameError"
+                    class="error-message"></span><br>
+                <input type="text" name="username" id="username" placeholder="Name" onblur="validateUsername()">
+                <br><br>
+
+                <label for="email">Email<sup>*</sup></label><span id="emailError" class="error-message"></span> <br>
+                <input type="email" name="email" id="email" placeholder="Email">
+                <br><br>
+
+                <!-- Current address input -->
+                <label for="currAddress">Current Address<sup>*</sup></label><span id="address1Error"
+                    class="error-message"></span> <br>
+                <input type="text" name="currAddress" id="currAddress" placeholder="Address line 1"><br>
+
+                <div class="city-state">
+                    <div>
+                        <span id="city1Error" class="error-message"></span><br>
+                        <input type="text" name="city" id="city1" placeholder="City">
+                    </div>
+                    <div>
+                        <span id="state1Error" class="error-message"></span><br>
+                        <label for="state1">
+                            <select id="state1">
+                                <option value="Select">Select</option>
+                                <option value="TamilNadu">TamilNadu</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Karnataka">Karnataka</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <br>
+
+                <!-- Checkbox for same address -->
+                <label for="permanent">Permanent Address<sup>*</sup></label><span id="permanentError"
+                    class="error-message"></span>
+                <input type="checkbox" id="check" onclick="AddressUpdate()">Same as Current Address
+                <br>
+                <span id="perAddress1Error" class="error-message"></span><br>
+                <input type="text" name="perAddress" id="perAddress1" placeholder="Address line 1"><br>
+
+                <div class="city-state">
+                    <div>
+                        <span id="city2Error" class="error-message"></span><br>
+                        <input type="text" name="city" id="city2" placeholder="City">
+                    </div>
+                    <div>
+                        <span id="state2Error" class="error-message"></span><br>
+                        <label for="state2">
+                            <select id="state2">
+                                <option value="Select">Select</option>
+                                <option value="TamilNadu">TamilNadu</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Karnataka">Karnataka</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+
+                <br><br>
+
+            </div>
+            <div class="form-left">
+                <label for="fatherName">Father's Name<sup>*</sup></label><span id="fatherNameError"
+                    class="error-message"></span><br>
+                <input type="text" name="fatherName" id="fatherName" placeholder="FatherName"
+                    onblur="validatefatherName()">
+                <br><br>
+
+                <!-- Date of birth input -->
+                <div class="dob-mobile">
+                    <div>
+                        <label for="dob">Date Of Birth<sup>*</sup></label><span id="dobError"
+                            class="error-message"></span><br>
+                        <input type="date" name="dob" id="dob">
+                    </div>
+                    <div>
+                        <label for="phone">Mobile No<sup>*</sup></label><span id="mobileError"
+                            class="error-message"></span><br>
+                        <input type="tel" name="phone" id="phone" placeholder="phone Number" maxlength="10">
+                    </div>
+                </div>
+
+                <br>
+                <span id="perAddress2Error" class="error-message"></span><br>
+                <input type="text" name="currAddress" id="currAddress2" placeholder="Address line 2"><br>
+                <span id="pincode1Error" class="error-message"></span><br>
+                <input type="text" name="pincode" id="pincode1" placeholder="Zip Code" maxlength="6"><br><br>
+
+                <br><br><input type="text" name="permanent" id="perAddress2" placeholder="Address line 2"><br>
+                <span id="pincode2Error" class="error-message"></span><br>
+                <input type="text" name="pincode" id="pincode2" placeholder="Zip Code" maxlength="6">
+            </div>
+        </div>
+        <div>
+            Upload Profile Photo<sup>*</sup>(JPG/PNG format only)
+            Please upload a photo of yourself. Your face should be clearly visible.Make sure the image size does not
+            exceed 500KB.
+            <br><br>
+            <input type="file" name="photo" id="photo"><span id="photoError" class="error-message"></span>
+        </div>
+        <input type="submit" value="Submit" id="submitBtn" onclick="submitValidation()">
+    </form>
+
+    <div id="table-div" style="display: none;">
+        <div><input type="button" value="Back" onclick="BackFunction()"></div>
+        <table border="3">
+            <tr>
+                <th>Name</th>
+                <th>FatherName</th>
+                <th>Email</th>
+                <th>DOB</th>
+                <th>Mobile</th>
+                <th>Current Address line 1</th>
+                <th>Current Address line 2</th>
+                <th>Current City</th>
+                <th>Current State</th>
+                <th>Current Pin Code</th>
+                <th>Permanent Address line 1</th>
+                <th>Permanent Address line 2</th>
+                <th>Permanent City</th>
+                <th>Permanent State</th>
+                <th>Permanent Pin COde</th>
+                <th>Photo</th>
+            </tr>
+            <tBody id="tableBody">
+
+            </tBody>
+        </table>
+    </div>
+</body>
+
+</html>
