@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="ForrmValid.js" defer></script>
+
+    <style>
+        .form-div {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .error-msg {
+            color: red;
+            font-size: 14px;
+        }
+
+        .incorrect-value {
+            border: 2px solid red;
+        }
+
+        .correct-value {
+            border: 2px solid green;
+        }
+
+        table {
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-Maindiv">
+        <form id="my-form">
+            <div>
+                <h2>User Registration Form</h2>
+            </div>
+            <div class="form-div">
+                <div class="form-left">
+                    <label for="first-name">Name :</label>
+                    <input type="text" name="first-name" id="first-name" class="input-box" placeholder="FirstName"
+                        onblur="FirstNameValidation()"><br>
+                    <span class="error-msg" id="first-name-error"></span>
+                    <br><br>
+
+                    <label for="email">Conatact :</label>
+                    <input type="text" name="email" id="email" class="input-box" placeholder="email"
+                        onblur="EmailValidation()"><br>
+                    <span class="error-msg" id="email-error"></span><br><br>
+
+                    <label for="password">Password :</label>
+                    <input type="pwd" name="password" id="password" class="input-box" placeholder="Password"
+                        minlength="8" onblur="PasswordValidation()"><br>
+                    <span class="error-msg" id="password-error"></span><br>
+
+                    <label for="gender">Gender :</label>
+                    <input type="radio" name="gender" id="male" value="male" onblur="GenderValidation()">Male
+                    <input type="radio" name="gender" id="female" value="female" onblur="GenderValidation()">Female
+                    <input type="radio" name="gender" id="Others" value="others" onblur="GenderValidation()">Others
+                    <span class="error-msg" id="gender-error"></span>
+                    <br><br>
+
+                    <label for="present-add">Present Address</label><br>
+                    <textarea name="present" id="present-add" class="input-box" rows="5" cols="30"
+                        onblur="presentAddValidation()"></textarea>
+                    <br><span class="error-msg" id="present-error"></span><br>
+
+                    <label for="present-pincode">Pincode :</label><br>
+                    <input type="text" name="present-pincode" id="present-pincode" class="input-box"
+                        placeholder="Pincode" maxlength="6" onblur="PresentPincodeValidation()"><br>
+                    <span class="error-msg" id="present-pincode-error"></span><br>
+
+                    <label for="present-state">State :</label><br>
+                    <select name="present-state" id="present-state" class="input-box" onblur="State1Validation()">
+                        <option value="Select">Select</option>
+                        <option value="TamilNadu">TamilNadu</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Karnataka">Karnataka</option>
+                    </select>
+                    <span class="error-msg" id="present-state-error"></span><br><br>
+
+                    <label for="dob">Date of Birth :</label><br>
+                    <input type="date" name="dob" id="dob" class="input-box" onblur="DOBValidation()"><br>
+                    <span class="error-msg" id="dob-error"></span><br>
+
+                    <label for="languages">Languages</label><br>
+                    <input type="checkbox" name="language" id="tamil" value="Tamil" onblur="LanguagesValidation()">Tamil
+                    <br>
+                    <input type="checkbox" name="language" id="english" value="English"
+                        onblur="LanguagesValidation()">English <br>
+                    <input type="checkbox" name="language" id="french" value="French"
+                        onblur="LanguagesValidation()">French <br>
+                    <br><span class="error-msg" id="languages-error"></span><br>
+
+                    <label for="photo">Upload your Photo</label><br><br>
+                    <input type="file" id="photo" name="photo" onblur="PhototValidation()"><br>
+                    <span class="error-msg" id="photo-error"></span><br>
+
+                </div>
+                <div class="form-right">
+                    <label for="last-name"></label>
+                    <input type="text" name="last-name" id="last-name" class="input-box" placeholder="LastName"
+                        onblur="LastNameValidation()">
+                    <br><span class="error-msg" id="last-name-error"></span> <br><br>
+
+                    <label for="phone"></label>
+                    <input type="text" name="phone" id="phone" class="input-box" placeholder="Phone Number"
+                        maxlength="10" onblur="PhoneNumberValidation()">
+                    <br><span class="error-msg" id="phone-error"></span> <br><br>
+
+                    <label for="confirm-pwd"></label>
+                    <input type="text" name="confirm-pwd" id="confirm-pwd" class="input-box"
+                        placeholder="Confirm Password" onblur="ConfirmPwdValidation()">
+                    <br><span class="error-msg" id="confirm-pwd-error"></span> <br><br><br>
+
+                    <label for="permanent-add">Permanent Address:</label>
+                    <input type="checkbox" id="add-check" onclick="AddressCopy()">Same as present address. <br>
+                    <textarea name="permanent" id="permanent-add" class="input-box" rows="5" cols="30"
+                        onblur="PermanentAddValidation()"></textarea>
+                    <br><span class="error-msg" id="permanent-error"></span> <br>
+
+                    <label for="permanent-pincode">Pincode :</label><br>
+                    <input type="text" name="permanent-pincode" id="permanent-pincode" class="input-box"
+                        placeholder="Pincode" maxlength="6" onblur="permanentPicodeValidation()"><br>
+                    <span class="error-msg" id="permanent-pincode-error"></span> <br>
+
+                    <label for="permanent-state">State :</label><br>
+                    <select name="permanent-state" id="permanent-state" class="input-box" onblur="State2Validation()">
+                        <option value="Select">Select</option>
+                        <option value="TamilNadu">TamilNadu</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Karnataka">Karnataka</option>
+                    </select>
+                    <span class="error-msg" id="permanent-state-error"></span> <br><br>
+
+                    <label for="dob-time">Birth Time :</label><br>
+                    <input type="time" name="dob-time" id="dob-time" class="input-box"
+                        onblur="BirthTimeValidation()"><br>
+                    <span class="error-msg" id="dob-time-error"></span> <br>
+
+                    <label for="interest">Select your field of interest :</label><br>
+                    <select name="interest" id="interest" class="input-box" multiple onblur="InterestValidation()">
+                        <option value="Music">Music</option>
+                        <option value="Singing">Singing</option>
+                        <option value="Dancing">Dancing</option>
+                        <option value="Drawing">Drawing</option>
+                    </select>
+                    <span class="error-msg" id="interest-error"></span> <br><br>
+
+                    <label for="resume">Upload your Resume</label><br><br>
+                    <input type="file" id="resume" name="resume" onblur="ResumeValidation()"><br>
+                    <span class="error-msg" id="resume-error"></span> <br>
+                </div>
+            </div>
+            <div>
+                <input type="submit" id="submitBtn" value="Submit" onclick="SubmitValidation()">
+                <input type="reset" id="resetBtn" value="Reset">
+            </div>
+        </form>
+    </div>
+
+    <div id="table-div" style="display: none;">
+        <div>
+            <input type="button" value="AddUser" id="add-user-btn" onclick="AddUser()">
+            <input type="button" value="Back" id="back-btn" onclick="Back()">
+
+        </div>
+        <table border="3">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Password</th>
+                <th>Gender</th>
+                <th>Present Address</th>
+                <th>permanent Address</th>
+                <th>DOB</th>
+                <th>Birth Time</th>
+                <th>Languages</th>
+                <th>Interest</th>
+                <th>Photo</th>
+                <th>Resume</th>
+                <th>Action</th>
+            </tr>
+            <tbody id="table-body">
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>
